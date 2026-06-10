@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: "./src/js/index.ts",
+  entry: "./src/js/index.tsx", // <- ここをtsxに変更
   output: {
     path: `${__dirname}/dist/`,
     filename: "bundle.js",
@@ -17,13 +17,13 @@ module.exports = {
   module: {
     rules: [
       {
-        // 拡張子 css のファイル（正規表現）;
+        // 拡張子 css のファイル（正規表現）
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        // 拡張子 .ts の場合
-        test: /\.ts$/,
+        // 拡張子 .ts .tsx の場合
+        test: /(\.ts|\.tsx)$/, // <- ここにtsxを追加
         // TypeScript をコンパイルする
         use: "ts-loader",
       },
@@ -38,6 +38,6 @@ module.exports = {
   ],
   resolve: {
     // 拡張子を配列で指定
-    extensions: [".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js"], // <- ここにtsxを追加
   },
 };

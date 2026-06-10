@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    // ソースマップを有効化
-    "sourceMap": true,
-    // TSはECMAScript 5に変換
-    "target": "ES5",
-    // TSのモジュールはES Modulesとして出力
-    "module": "es2015",
-    // 厳密モードとして設定
-    "strict": true
-  }
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "include": ["src"]
 }
