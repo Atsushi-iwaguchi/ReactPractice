@@ -3,29 +3,21 @@ import { TextField } from "../parts/TextField";
 import { Todo } from "../../App";
 
 type Props = {
-  setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
+  addTodo: (newTask: string, newPerson: string, newDeadline: string) => void;
+};
 
-export const NewTodoForm = ({setTodoList}: Props) => {
+export const NewTodoForm = ({ addTodo }: Props) => {
   const [newTask, setNewTask] = useState<string>("");
   const [newPerson, setNewPerson] = useState<string>("");
   const [newDeadline, setNewDeadline] = useState<string>("");
   const addNewTodo = () => {
-      setTodoList((prev) => [
-        ...prev,
-        {
-          id: Date.now(),
-          task: newTask,
-          person: newPerson,
-          deadline: newDeadline,
-        },
-      ]);
-  
-      setNewTask("");
-      setNewPerson("");
-      setNewDeadline("");
-    };
-  
+    addTodo(newTask, newPerson, newDeadline);
+
+    setNewTask("");
+    setNewPerson("");
+    setNewDeadline("");
+  };
+
   return (
     <div className="flex width-16">
       <TextField

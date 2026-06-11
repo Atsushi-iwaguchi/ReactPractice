@@ -17,5 +17,16 @@ export const useTodoList = () => {
     localStorage.setItem("todo-list", JSON.stringify(todoList));
   }, [todoList]);
 
-  return { todoList, setTodoList}
+  const addTodo = (newTask: string, newPerson: string, newDeadline: string) =>
+    setTodoList((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        task: newTask,
+        person: newPerson,
+        deadline: newDeadline,
+      },
+    ]);
+
+  return { todoList, setTodoList, addTodo };
 };
