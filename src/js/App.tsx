@@ -1,18 +1,11 @@
 import { TodoList } from "./components/todo/TodoList";
 import { Heading } from "./components/parts/Heading";
-import { useState } from "react";
-import { TextField } from "./components/parts/TextField";
 import { NewTodoForm } from "./components/todo/NewTodoForm";
-
-export type Todo = {
-  id: number;
-  task: string;
-  person: string;
-  deadline: string;
-};
+import { Todo } from "./components/todo/type";
+import { useTodoList } from "./components/todo/use-todo-list";
 
 export const App = () => {
-  const [todoList, setTodoList] = useState<Todo[]>([]);
+  const {todoList, setTodoList} = useTodoList()
 
   return (
     <main className="w-4/5 my-0 text-center">
@@ -24,8 +17,9 @@ export const App = () => {
 
       <div className="mt-8">
         <Heading level="h3">Todo一覧</Heading>
-        <TodoList todoList={todoList} />
+        <TodoList todoList={todoList} setTodoList={setTodoList} />
       </div>
     </main>
   );
 };
+export { Todo };
