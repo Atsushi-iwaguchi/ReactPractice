@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { TextField } from "../parts/TextField";
-import { Todo } from "../../App";
 
 type Props = {
   addTodo: (newTask: string, newPerson: string, newDeadline: string) => void;
