@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { TodoList } from "./components/todo/TodoList";
 import "../css/main.css";
 import { App } from "./App";
+import { AuthProvider } from "./contexts/AuthContext";
 
 // Clear the existing HTML content
 
@@ -21,4 +22,8 @@ import { App } from "./App";
 
 // Render your React component instead
 const root = createRoot(document.getElementById("app")!);
-root.render(<App />);
+root.render(
+  <AuthProvider>
+    <App />
+  </AuthProvider>,
+);
