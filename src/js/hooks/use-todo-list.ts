@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Todo } from "../components/todo/type";
 
 export const useTodoList = () => {
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  const [filterWord, setFilterWord] = useState<string>("");
 
   //マウント時にlocalStorageからtodo一覧データを取得する
   useEffect(() => {
@@ -21,12 +22,27 @@ export const useTodoList = () => {
     setTodoList((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id: Date.now().toString(),
         task: newTask,
         person: newPerson,
         deadline: newDeadline,
       },
     ]);
 
-  return { todoList, setTodoList, addTodo };
+  const filterTodoList = useMemo(
+    () =>
+      todoList.filter(
+        (todo) =>
+          todo.task.includes(filterWord) || todo.person.includes(filterWord),
+      ),
+    [todoList, filterWord],
+  );
+
+  return {
+    todoList: filterTodoList,
+    setTodoList,
+    addTodo,
+    filterWord,
+    setFilterWord,
+  };
 };

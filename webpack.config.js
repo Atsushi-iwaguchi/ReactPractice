@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: "./src/js/index.tsx",
   output: {
+    publicPath: "/",
     path: `${__dirname}/dist/`,
     filename: "bundle.js",
   },
@@ -11,6 +12,15 @@ module.exports = {
   devServer: {
     static: {
       directory: "./dist",
+    },
+    historyApiFallback: {
+      index: "index.html",
+    },
+    devMiddleware: {
+      writeToDisk: (filePath) => {
+        // hot-update ファイルを除外
+        return !/\.hot-update\.(js|json|js\.map)$/.test(filePath);
+      },
     },
   },
   devtool: "source-map",

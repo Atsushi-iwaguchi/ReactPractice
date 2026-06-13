@@ -1,15 +1,20 @@
 import { useAuth } from "./hooks/use-auth";
 import { useTodoList } from "./hooks/use-todo-list";
 import { Login } from "./pages/Login";
+import { TodoDetail } from "./pages/TodoDetail";
 import { TodoPage } from "./pages/Todopage";
+import {Route, createBrowserRouter, createRoutesFromElements, RouterProvider,} from "react-router-dom"
 
 
-export const App = () => {
-  const { todoList, setTodoList, addTodo } = useTodoList();
-  const { isLoggedIn, login, logout, userName, setUserName } = useAuth();
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/todo" element={<TodoPage/>}/>
+      <Route path="/todo/:id" element={<TodoDetail/>}/>
+    </>
+  )
+)
 
-  if (!isLoggedIn) {
-    return <Login />;
-  }
-  return <TodoPage />;
-};
+
+export const App = () => <RouterProvider router={router} />

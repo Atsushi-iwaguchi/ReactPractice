@@ -1,15 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import { Todo } from "./type";
+import {Link} from "react-router-dom"
 
 type TodoItemProps = {
-  id: number;
+  id: string;
   task: string;
   person: string;
   deadline: string;
   setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-export const TodoItem = ({
+export const TodoItem = memo(({
   id,
   task,
   person,
@@ -17,7 +18,8 @@ export const TodoItem = ({
   setTodoList,
 }: TodoItemProps) => {
   return (
-    <li className="grid grid-cols-4">
+    <li className="grid grid-cols-5">
+      <div><Link to={`/todo/${id}`}>{id}</Link></div>
       <div>{task}</div>
       <div>{person}</div>
       <div>{deadline}</div>
@@ -33,4 +35,4 @@ export const TodoItem = ({
       </div>
     </li>
   );
-};
+});
